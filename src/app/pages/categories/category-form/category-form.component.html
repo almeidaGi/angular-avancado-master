@@ -8,11 +8,12 @@
 <div class="row mb-4">
     <div class="col-md">
         <h1 class=" h2 border-left pl-2">
-            Formulário de Categoria
+             {{pageTitle}}
         </h1>
+        <span>{{descriptionCategorySmall}}</span>
     </div>
     <div class="col-md-2 btnBack ">
-        <a routerLink="/categories" class="btn btn-outline-danger float-sm-left">
+        <a routerLink="/categories" class="btn btn-info float-sm-left">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left"
                 viewBox="0 0 16 16">
                 <path fill-rule="evenodd"
@@ -22,7 +23,7 @@
         </a>
     </div>
 </div>
-<form>
+<form [formGroup]="categoryForm">
     <div class="card">
         <div class="card-header">
             Informações sobre a Categoria
@@ -46,10 +47,9 @@
     </div>
     <div class="justify-content-center">
 
-    <button type="submit" class="btn btn-primary btn-lg  mt-3">
-        Salvar
-    </button>
-</div>
-
+        <button type="submit" class="btn btn-primary btn-lg  mt-3">
+            Salvar
+        </button>
+    </div>
 
 </form>
