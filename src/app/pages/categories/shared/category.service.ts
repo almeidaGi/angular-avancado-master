@@ -19,6 +19,7 @@ export class CategoryService {
     )
   }
   getById(id: number): Observable<Category> {
+  
     const url = `${this.apiPath}/${id}`;
     return this.http.get(url).pipe(
       catchError(this.handleError),
@@ -26,12 +27,13 @@ export class CategoryService {
     )
   }
   create(category: Category): Observable<Category> {
-    return this.http.post(this.apiPath, Category).pipe(
-      catchError(this.handleError),
-      map(this.jsonDataToCategory)
+    return this.http.post(this.apiPath, category).pipe(      
+      map(this.jsonDataToCategory),
+      catchError(this.handleError)
     )
   }
   update(category: Category): Observable<Category>{
+
     const url = `${this.apiPath}/${category.id}`;
     return  this.http.put( url, category).pipe(
       catchError(this.handleError),
@@ -46,12 +48,13 @@ export class CategoryService {
     )
   }
 
-  private jsonDataToCategories(jsonData: any[]): Category[] {
+  private jsonDataToCategories(jsonData: any[]): Category[] {  
+  
     const cetegories: Category[] = [];
     jsonData.forEach(element => cetegories.push(element as Category));
     return cetegories;
   }
-  private handleError(error: any): Observable<any> {
+  private handleError(error: any): Observable<any> {   
     console.log("ERRO NA REQUISIÇÃO =>", error);
     return throwError(error);
   }

@@ -1,10 +1,11 @@
 import { Component, OnInit, AfterContentChecked } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
+import { ToastrService } from 'ngx-toastr';
 import { switchMap } from 'rxjs';
 import { Category } from '../shared/category.module';
 import { CategoryService } from '../shared/category.service';
-//import toastr from "toastr";
+
 
 @Component({
   selector: 'app-category-form',
@@ -25,7 +26,9 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
     private categoryService: CategoryService,
     private route: ActivatedRoute,
     private router: Router,
-    private formBuilder: FormBuilder
+    private toastr: ToastrService,
+    private formBuilder: FormBuilder,
+    
   ) { }
 
   ngOnInit(): void {
@@ -35,7 +38,14 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
   }
   ngAfterContentChecked(): void {
     this.setPageTitle();
-
+  }
+  public submitForm(){    
+    this.submittingForm = true;
+    if(this.currentAction == "new"){
+      this.createCategory();
+    }else{
+      this.updateCategory();
+    }
   }
   private setCurrentAction() {
     if (this.route.snapshot.url[0].path == "new") {
@@ -45,11 +55,15 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
   }
   private buildCategoryForm(){
     this.categoryForm = this.formBuilder.group({
-      id: [null ],
-      name: [null, [Validators.required, Validators.minLength(2)]],
-      description: [null]
+      id: [null],
+      name: new FormControl (null, [Validators.required, Validators.minLength(2)]),
+      description: [null],
     })
   }
+
+  get name(): any { return this.categoryForm.get('name');}
+  get description(): any { return this.categoryForm.get('description');}
+
   private loadCategory(){
     if(this.currentAction == "edit"){
       this.route.paramMap.pipe(
@@ -69,8 +83,41 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
     }else{
       const nameCategory = this.category.name || "";
       const descriptionSmall = this.category.description || "";
-      this.pageTitle = "Editando Categoria: " + nameCategory;
+      this.pageTitle = nameCategory;
       this.descriptionCategorySmall = descriptionSmall
     }
+  }
+  private updateCategory(){      
+    const category: Category = Object.assign( new Category(), this.categoryForm.value);
+    this.categoryService.update(category).subscribe(
+      category => this.actionFormSuccess(category),
+      error => this.actionsForError(error)
+    ) 
+  }
+
+  public createCategory(){
+    const category: Category = Object.assign( new Category(), this.categoryForm.value);
+    this.categoryService.create(category).subscribe(
+      category => this.actionFormSuccess(category),
+      error => this.actionsForError(error)
+    ) 
+
+  }
+  private actionFormSuccess(category: Category){
+    if(category.id != this.category.id ){      
+       this.toastr.success("Categoria criada com sucesso");
+       this.router.navigateByUrl("categories", {skipLocationChange: true}).then(
+        ()=> this.router.navigate(["categories",category.id,"edit"])
+      )
+    }else{
+    this.toastr.success(" Categoria atualizada com sucesso ");
+    this.router.navigateByUrl("categories", {skipLocationChange: true}).then(
+      ()=> this.router.navigate(["categories",category.id,"edit"])
+    )
+  }
+  }
+  private actionsForError(error: any){
+    this.toastr.error("Ocorreu um erro ao processar a sua solicitação");
+    this.submittingForm = false;
   }
 }

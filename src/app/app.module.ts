@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDatabase } from './in-memory-database';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,9 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     DemoMaterialModule,
     FormsModule,
-    HttpClientModule,
+    HttpClientModule,    
+    ToastrModule.forRoot({ positionClass: 'inline' }),
+    ToastrModule.forRoot(),    
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDatabase)
   ],
   providers: [],
