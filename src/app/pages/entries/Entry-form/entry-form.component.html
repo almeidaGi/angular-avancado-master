@@ -1,0 +1,68 @@
+<nav class="mb-5">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+        <li class="breadcrumb-item"><a routerLink="/">Categorias</a></li>
+        <li class="breadcrumb-item active"> Formulário de Lançamentos: {{pageTitle}}</li>
+    </ol>
+</nav>
+<div class="row mb-4">
+    <div class="col-md">
+        <h1 class=" h2 border-left pl-2">
+            Editando Lançamento: {{pageTitle}}
+        </h1>
+        <span>{{descriptionEntrySmall}}</span>
+    </div>
+    <div class="col-md-2 btnBack">
+        <a (click)="back()"class="btn btn-info text-white  float-sm-left">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="text-white" class="bi bi-arrow-left"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+            </svg>
+            Voltar
+        </a>
+    </div>
+</div>
+<form [formGroup]="entryForm" (submit)="submitForm()">
+    <div class="card">
+        <div class="card-header">
+            Informações sobre o lançamento:
+        </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="name">
+                            Nome
+                        </label>
+                        <input type="text" class="form-control" id="name" formControlName="name">
+                        <div class="text-danger " required *ngIf="name.invalid && name.touched">
+                            <div *ngIf="name.errors?.['required']">Campo obrigatório.</div>
+                            <div *ngIf="name.errors?.['minlength']">Campo deve ter no minímo 2 caracteres.</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-8">
+                        <label for="description">Descrição</label>
+                        <input type="text" class="form-control" id="description" formControlName="description">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div>
+            <div class="alert alert-danger mt-4" *ngIf="serverErrorMessages">
+                <strong>Erro no servidor: </strong>
+                <ul>
+                    <li *ngFor="let err of serverErrorMessages">
+                        {{err}}
+                    </li>
+                </ul>
+            </div>
+
+            <button [disabled]="submittingForm || entryForm.invalid" type="submit" class="btn btn-primary text-right btn-lg  mt-3">
+                Salvar
+            </button>
+        </div>
+     
+
+</form>
