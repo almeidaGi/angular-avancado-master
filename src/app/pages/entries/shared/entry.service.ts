@@ -15,7 +15,7 @@ export class EntryService {
   getAll(): Observable<Entry[]> {
     return this.http.get(this.apiPath).pipe(
       catchError(this.handleError),
-      map(this.jsonDataToCategories)
+      map(this.jsonDataToEntries)
     )
   }
   getById(id: number): Observable<Entry> {
@@ -48,17 +48,19 @@ export class EntryService {
     )
   }
 
-  private jsonDataToCategories(jsonData: any[]): Entry[] {  
-  
+  private jsonDataToEntries(jsonData: any[]): Entry[] {   
     const entryes: Entry[] = [];
-    jsonData.forEach(element => entryes.push(element as Entry));
+    jsonData.forEach(element => {
+      const entry = Object.assign( new Entry , element);
+      entryes.push(entry);
+    });
     return entryes;
-  }
+  };
   private handleError(error: any): Observable<any> {   
     console.log("ERRO NA REQUISIÇÃO =>", error);
     return throwError(error);
   }
   private jsonDataToEntry(jsonData: any): Entry {
-    return jsonData as Entry;
+    return Object.assign(new Entry(), jsonData);
   }
 }

@@ -9,15 +9,19 @@ export class Entry {
         public amount?: string,
         public date?: string,
         public paid?: boolean,
-        public categoryId?: number,
+        public categoryId?: number,       
         public category?: Category
+        
     ) { }
     static types = {
         expense: 'Dispesa',
         renevue: 'Receitas'
     }
-    get paidText(): string {
+    get paidText(): string {  
         return this.paid ? 'Pago': 'Pedente';
+    }
+    get nameCategory():any {
+        return this.category;
     }
 
 }
