@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {  NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { EntriesRoutingModule } from './entries-routing.module';
@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { IMaskModule } from 'angular-imask';
 import {CalendarModule} from 'primeng/calendar';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {CalendarModule} from 'primeng/calendar';
     EntriesRoutingModule,
     ReactiveFormsModule,  
     IMaskModule,
-    CalendarModule,    
+    CalendarModule,
+    TranslateModule,  
     ToastrModule.forRoot(), 
   ]
 })

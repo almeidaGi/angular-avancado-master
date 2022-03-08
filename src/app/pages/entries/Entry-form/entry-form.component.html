@@ -1,7 +1,7 @@
 <nav class="mb-5">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-        <li class="breadcrumb-item"><a routerLink="/">Categorias</a></li>
+        <li class="breadcrumb-item"><a routerLink="/entries">Lançamentos</a></li>
         <li class="breadcrumb-item active"> Formulário de Lançamentos: {{pageTitle}}</li>
     </ol>
 </nav>
@@ -31,22 +31,23 @@
             <div class="card-body">
                
                 <div class="row">
-                    
                         <!--type-->
                         <div class="form-group col-md-2">
                             <label for="type">
                                 Tipo
                             </label>
                             <select name="type" id="type" formControlName="type" class="form-control">
-                                <option value="expense">Despesas</option>
-                                <option value="revenue">Receita</option>
+                               
+                                <option *ngFor="let options of typeOptions" [value]="options.value">
+                                    {{options.text}}
+                                </option>                                
                             </select>
                             <div class="text-danger " required *ngIf="type.invalid && type.touched">
                                 <div *ngIf="type.errors?.['required']">Campo obrigatório.</div>
                             </div>
-                        </div>
-                  
-                    <!--lançamento-->
+                        </div>  
+                                   
+                   <!--lançamento-->
                     <div class="form-group col-md-5">
                         <label for="name">
                             Lançamento
@@ -92,8 +93,35 @@
                             <div *ngIf="date.errors?.['required']">Campo obrigatório.</div>
                         </div>
                     </div>
+                    <!--pago-->
+                    <div class="form-group col-md-2">
+                        <label  >
+                            Pago
+                        </label><br>
+                        <div class="btn-group">
+                            <label (click)="paid.setValue(true)" class="btn btn-outline-info btn-group-lg" [class.active]="paid.value == true">Pago</label>
+                            <label (click)="paid.setValue(false)" class="btn btn-outline-info" [class.active]="paid.value == false">Pendente</label>
+                        </div>
+                        <div class="text-danger " required *ngIf="paid.invalid && amount.touched">
+                            <div *ngIf="paid.errors?.['required']">Campo obrigatório.</div>
+                        </div>
+                    </div>
+                    <!--categoryId-->
+                    <div class="form-group col-md-3">
+                        <label for="categoryId">
+                            Categoria
+                        </label>
+                        <select name="categoryId" id="type" formControlName="categoryId" class="form-control">
+                            <option *ngFor="let category of categories" [value]="category.id">
+                               {{ category.name}}
+                            </option>
+                        </select>
+                        <div class="text-danger " required *ngIf="categoryId.invalid && categoryId.touched">
+                            <div *ngIf="type.errors?.['required']">Campo obrigatório.</div>
+                        </div>
+                    </div>
                     <!--description-->
-                    <div class="form-group col-md-5">
+                    <div class="form-group col-md-7">
                         <label for="description">Descrição</label>
                         <input type="text" class="form-control" id="description" formControlName="description">
                     </div>
@@ -114,7 +142,6 @@
             <button [disabled]="submittingForm || entryForm.invalid" type="submit" class="btn btn-primary text-right btn-lg  mt-3">
                 Salvar
             </button>
-        </div>
-     
-
+        </div>   
 </form>
+<pre>{{entryForm.value | json}}</pre>
