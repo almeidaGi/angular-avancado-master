@@ -13,7 +13,7 @@
         <span>{{descriptionEntrySmall}}</span>
     </div>
     <div class="col-md-2 btnBack">
-        <a (click)="back()"class="btn btn-info text-white  float-sm-left">
+        <a  routerLink="/entries"class="btn btn-info text-white  float-sm-left">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="text-white" class="bi bi-arrow-left"
                 viewBox="0 0 16 16">
                 <path fill-rule="evenodd"
@@ -29,10 +29,27 @@
             Informações sobre o lançamento:
         </div>
             <div class="card-body">
+               
                 <div class="row">
-                    <div class="form-group col-md-4">
+                    
+                        <!--type-->
+                        <div class="form-group col-md-2">
+                            <label for="type">
+                                Tipo
+                            </label>
+                            <select name="type" id="type" formControlName="type" class="form-control">
+                                <option value="expense">Despesas</option>
+                                <option value="revenue">Receita</option>
+                            </select>
+                            <div class="text-danger " required *ngIf="type.invalid && type.touched">
+                                <div *ngIf="type.errors?.['required']">Campo obrigatório.</div>
+                            </div>
+                        </div>
+                  
+                    <!--lançamento-->
+                    <div class="form-group col-md-5">
                         <label for="name">
-                            Nome
+                            Lançamento
                         </label>
                         <input type="text" class="form-control" id="name" formControlName="name">
                         <div class="text-danger " required *ngIf="name.invalid && name.touched">
@@ -40,8 +57,43 @@
                             <div *ngIf="name.errors?.['minlength']">Campo deve ter no minímo 2 caracteres.</div>
                         </div>
                     </div>
+                    <!--valor-->
+                    <div class="form-group col-md-3">
+                        <label for="amount">
+                            Valor
+                        </label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">R$</div>
+                            </div>
+                            <input [imask]="imaskConfig" type="text" class="form-control text-end" id="amount" formControlName="amount">
+                        </div>
+                        <div class="text-danger " required *ngIf="amount.invalid && amount.touched">
+                            <div *ngIf="amount.errors?.['required']">Campo obrigatório.</div>
+                            <div *ngIf="amount.errors?.['minlength']">Campo deve ter no minímo 2 caracteres.</div>
+                        </div>
+                    </div>
+                     <!--data-->
+                    <div class="form-group col-md-2">
+                        <label for="date">Data</label>
+                        <p-calendar
+                         id="date" 
+                         formControlName="date"
+                          inputStyleClass="form-control"
+                          dataType="string"
+                          dateFormat="dd/mm/yy"
+                          [locale]="ptBR"
+                          [showButtonBar]="true"
+                          >
 
-                    <div class="form-group col-md-8">
+                        </p-calendar>
+                        
+                        <div class="text-danger " required *ngIf="date.invalid && date.touched">
+                            <div *ngIf="date.errors?.['required']">Campo obrigatório.</div>
+                        </div>
+                    </div>
+                    <!--description-->
+                    <div class="form-group col-md-5">
                         <label for="description">Descrição</label>
                         <input type="text" class="form-control" id="description" formControlName="description">
                     </div>

@@ -48,7 +48,7 @@ export class EntryService {
     )
   }
 
-  private jsonDataToEntries(jsonData: any[]): Entry[] {   
+  public jsonDataToEntries(jsonData: any[]): Entry[] {   
     const entryes: Entry[] = [];
     jsonData.forEach(element => {
       const entry = Object.assign( new Entry , element);
