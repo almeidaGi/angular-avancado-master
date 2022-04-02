@@ -1,22 +1,22 @@
 import { Category } from "../../categories/shared/category.module";
 
 export class Entry {
+
     constructor(
         public id?: number,
         public name?: string,
         public description?: string,
-        public type?: string,
+        public type?: boolean,
         public amount?: string,
         public date?: string,
         public paid?: boolean,
-        public categoryId?: number,     
-        public categoryName?: Category,
-        public category?: Category
-        
+        public categoryId: number = 0,     
+        public categoryName?: string,
+        public category?: Category        
     ) { }
-    static types = {
-        expense: 'Dispesas',
-        renevue: 'Receitas'
+    get types() : string {
+       return this.type? 'Dispesas':'Receitas';
+       
     }
     get paidText(): string {  
         return this.paid ? 'Pago': 'Pedente';

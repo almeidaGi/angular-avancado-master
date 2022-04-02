@@ -24,6 +24,7 @@ export class EntryFormComponent implements OnInit, AfterContentChecked, OnChange
   submittingForm = false;
   entry: Entry = new Entry();
   entryList: Entry[] = [];
+  getTypes: any;
   categories!: Array<Category>;
 
   imaskConfig = {
@@ -62,9 +63,7 @@ export class EntryFormComponent implements OnInit, AfterContentChecked, OnChange
     this.loadCategory();
   }
   ngOnChanges(changes: SimpleChanges): void {
-  
-    this.typeOptions
-    
+   
   }
  
   ngAfterContentChecked(): void {
@@ -79,17 +78,7 @@ export class EntryFormComponent implements OnInit, AfterContentChecked, OnChange
       this.updateEntry();
     }
   }
-  get typeOptions(): Array<any>{
-     return Object.entries(Entry.types).map(
-      ([ text])=> {
-        console.log(text);
-          return{
-            text: text,
-          }
-      }
-    )
-  }
-
+ 
   private setCurrentAction() {
     if (this.route.snapshot.url[0].path == "new") {
       this.currentAction = "new"
@@ -101,7 +90,7 @@ export class EntryFormComponent implements OnInit, AfterContentChecked, OnChange
       id: [null],
       name: new FormControl(null, [Validators.required, Validators.minLength(2)]),
       description: [null],
-      type: new FormControl("expense", [Validators.required]),
+      type:  new FormControl(null, [Validators.required]),
       amount: new FormControl(null, [Validators.required, Validators.minLength(3)]),
       date: new FormControl(null, [Validators.required]),
       paid: new FormControl(true, [Validators.required]),
@@ -117,6 +106,7 @@ export class EntryFormComponent implements OnInit, AfterContentChecked, OnChange
   get date(): any { return this.entryForm.get('date'); }
   get paid(): any { return this.entryForm.get('paid'); }  
   get categoryId(): any { return this.entryForm.get('categoryId'); }
+  get category(): any { return this.entryForm.get('category'); }
 
   private loadEntry() {
     if (this.currentAction == "edit") {

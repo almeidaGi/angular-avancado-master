@@ -26,7 +26,7 @@ export class InMemoryDatabase implements InMemoryDbService {
                     paid: true,
                     date: "10/02/2020",
                     amount: "100,00",
-                    type: "expense",
+                    type: false,
                     description: "Camisa feminina branca",
                 } as Entry,
 
@@ -39,7 +39,7 @@ export class InMemoryDatabase implements InMemoryDbService {
                     paid: true,
                     date: "10/02/2020",
                     amount: "100,00",
-                    type: "expense",
+                    type: false,
                     description: "Camisa masculina branca",
                 } as Entry,
                 {
@@ -51,7 +51,7 @@ export class InMemoryDatabase implements InMemoryDbService {
                     paid: false,
                     date: "10/02/2020",
                     amount: "100,00",
-                    type: "revenue",
+                    type: true,
                     description: "Camisa masculina branca",
                 } as Entry,
 
@@ -64,7 +64,7 @@ export class InMemoryDatabase implements InMemoryDbService {
                     paid: true,
                     date: "10/02/2020",
                     amount: "100,00",
-                    type: "expense",
+                    type: false,
                     description: "Camisa feminina branca plus size",
                 } as Entry,
 
@@ -77,7 +77,7 @@ export class InMemoryDatabase implements InMemoryDbService {
                     paid: false,
                     date: "10/02/2020",
                     amount: "100,00",
-                    type: "revenue",
+                    type: true,
                     description: "Camisa masculina branca plus size",
                 } as Entry,
                 {
@@ -89,9 +89,10 @@ export class InMemoryDatabase implements InMemoryDbService {
                     paid: true,
                     date: "10/02/2020",
                     amount: "100,00",
-                    type: "expense",
+                    type: false,
                     description: "langerie femininas branca",
                 } as Entry,
+                
             ]
         return { categories, entryes }
     }

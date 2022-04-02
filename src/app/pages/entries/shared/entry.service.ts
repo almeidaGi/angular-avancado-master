@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { catchError, flatMap, map, mergeMap, Observable, throwError } from 'rxjs';
 import { Entry } from './entry.model';
+import { CategoryService } from '../../categories/shared/category.service';
+import { Category } from '../../categories/shared/category.module';
 
 
 @Injectable({
@@ -10,7 +12,7 @@ import { Entry } from './entry.model';
 export class EntryService {
   private apiPath: string = "api/entryes"
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private categoryService: CategoryService) { }
 
   getAll(): Observable<Entry[]> {
     return this.http.get(this.apiPath).pipe(
@@ -19,7 +21,7 @@ export class EntryService {
     )
   }
   getById(id: number): Observable<Entry> {
-  
+
     const url = `${this.apiPath}/${id}`;
     return this.http.get(url).pipe(
       catchError(this.handleError),
@@ -27,20 +29,26 @@ export class EntryService {
     )
   }
   create(entry: Entry): Observable<Entry> {
-    return this.http.post(this.apiPath, entry).pipe(      
-      map(this.jsonDataToEntry),
-      catchError(this.handleError)
-    )
+    debugger;
+    return this.categoryService.getById(entry.categoryId).pipe(
+      mergeMap(category => {
+        entry.categoryName = Object.assign(new Category, category).name;        
+        console.log(typeof(entry));
+        return this.http.post(this.apiPath, entry).pipe(
+          catchError(this.handleError),
+          map(this.jsonDataToEntry),
+        )
+      }))
   }
-  update(entry: Entry): Observable<Entry>{
 
+  update(entry: Entry): Observable<Entry> {
     const url = `${this.apiPath}/${entry.id}`;
-    return  this.http.put( url, entry).pipe(
+    return this.http.put(url, entry).pipe(
       catchError(this.handleError),
-      map(()=> entry)
+      map(() => entry)
     )
   }
-  delete(id: number): Observable<any>{    
+  delete(id: number): Observable<any> {
     const url = `${this.apiPath}/${id}`;
     return this.http.delete(url).pipe(
       catchError(this.handleError),
@@ -48,15 +56,15 @@ export class EntryService {
     )
   }
 
-  public jsonDataToEntries(jsonData: any[]): Entry[] {   
+  public jsonDataToEntries(jsonData: any[]): Entry[] {
     const entryes: Entry[] = [];
     jsonData.forEach(element => {
-      const entry = Object.assign( new Entry , element);
+      const entry = Object.assign(new Entry, element);      
       entryes.push(entry);
     });
     return entryes;
   };
-  private handleError(error: any): Observable<any> {   
+  private handleError(error: any): Observable<any> {
     console.log("ERRO NA REQUISIÇÃO =>", error);
     return throwError(error);
   }

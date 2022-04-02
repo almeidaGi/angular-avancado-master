@@ -37,10 +37,10 @@
                                 Tipo
                             </label>
                             <select name="type" id="type" formControlName="type" class="form-control">
-                               
-                                <option *ngFor="let options of typeOptions" [value]="options.value">
-                                    {{options.text}}
-                                </option>                                
+                                
+                                <option (onClick)="type.setValue(true)" [value]="type.value"> Dispesas</option>
+                                <option (onClick)="type.setValue(false)"[value]="type.value">Receitas </option>
+                                                                
                             </select>
                             <div class="text-danger " required *ngIf="type.invalid && type.touched">
                                 <div *ngIf="type.errors?.['required']">Campo obrigatório.</div>
@@ -143,5 +143,5 @@
                 Salvar
             </button>
         </div>   
-</form>
-<pre>{{entryForm.value | json}}</pre>
+    </form>
+    <pre>{{entryForm.value | json}}</pre>
