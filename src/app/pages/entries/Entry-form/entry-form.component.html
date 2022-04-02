@@ -38,8 +38,8 @@
                             </label>
                             <select name="type" id="type" formControlName="type" class="form-control">
                                 
-                                <option (onClick)="type.setValue(true)" [value]="type.value"> Dispesas</option>
-                                <option (onClick)="type.setValue(false)"[value]="type.value">Receitas </option>
+                                <option onClick="type.setValue(true)" [value]="type.value"> Dispesas</option>
+                                <option onClick="type.setValue(false)"[value]="type.value">Receitas </option>
                                                                 
                             </select>
                             <div class="text-danger " required *ngIf="type.invalid && type.touched">
