@@ -42,6 +42,7 @@
                    [class.text-success]="entry.type === true" 
                     [class.text-danger]="entry.type === false" >
                        {{entry.amount}}
+                       <pre>{{entry |json}}</pre>
                      </strong>
                      <br>
                      <strong> <small>{{entry.paidText}}</small></strong>
