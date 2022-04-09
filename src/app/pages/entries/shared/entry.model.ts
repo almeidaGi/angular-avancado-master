@@ -1,9 +1,10 @@
-import { Category } from "../../categories/shared/category.module";
+import { Category } from "../../categories/shared/category.model";
+import {baseResouceModel} from "../../../shared/models/base-resource.model";
 
-export class Entry {
+export class Entry extends baseResouceModel {
 
     constructor(
-        public id = 0,
+        override id = 0,
         public name?: string,
         public description?: string,
         public type?: boolean,
@@ -13,7 +14,7 @@ export class Entry {
         public categoryId: number = 0,     
         public categoryName?: string,
         public category?: Category        
-    ) { }
+    ) {super() }
     get types() : string {
        return this.type? 'Dispesas':'Receitas';
        

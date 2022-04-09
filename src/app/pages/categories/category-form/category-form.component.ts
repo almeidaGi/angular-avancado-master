@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 import { switchMap } from 'rxjs';
-import { Category } from '../shared/category.module';
+import { Category } from '../shared/category.model';
 import { CategoryService } from '../shared/category.service';
 
 
