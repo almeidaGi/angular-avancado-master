@@ -34,12 +34,14 @@ export class EntryService extends baseResouceService<Entry>{
   override jsonDataToResouces(jsonData: any[]): Entry[] {
     const entryes: Entry[] = [];
     jsonData.forEach(element => {
-      const entry = Entry.formJson(jsonData);      
+      const entry = Object.assign(new Entry, element);        
+    //return Entry.formJson(jsonData);       
       entryes.push(entry);
     });
     return entryes;
   };
   override jsonDataToResouce(jsonData: any): Entry {
-    return Entry.formJson(jsonData);
+    return Object.assign(new Entry(), jsonData);    
+   // return Entry.formJson(jsonData);
   }
 }
