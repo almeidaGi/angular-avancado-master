@@ -22,6 +22,9 @@ export class Entry extends baseResouceModel {
     get paidText(): string {  
         return this.paid ? 'Pago': 'Pedente';
     }
+    static formJson(jsonData: any): Entry{
+        return Object.assign(new Entry, jsonData) ;   
+    }
    /* get nameCategory():any {
         return this.category;
     }*/
