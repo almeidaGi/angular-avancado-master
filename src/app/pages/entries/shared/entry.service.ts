@@ -1,16 +1,16 @@
 import { Injectable, Injector } from '@angular/core';
 import { Entry } from './entry.model';
 import { CategoryService } from '../../categories/shared/category.service';
-import { baseResouceService } from 'src/app/shared/services/base-resource.service';
 import { mergeMap } from 'rxjs/operators';
 import { Category } from '../../categories/shared/category.model';
 import { Observable } from 'rxjs';
+import { BaseResouceService } from 'src/app/shared/services/base-resource.service';
 @Injectable({
   providedIn: 'root'
 })
-export class EntryService extends baseResouceService<Entry>{
+export class EntryService extends BaseResouceService<Entry>{
 
-  constructor( private categoryService: CategoryService , injetor: Injector)
+  constructor( private categoryService: EntryService , injetor: Injector)
    { super("api/entryes", injetor, Entry.formJson)}
 
   override create(entry: Entry): Observable<Entry> {   

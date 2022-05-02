@@ -3,7 +3,7 @@ import { catchError, map, Observable, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injector } from "@angular/core";
 
-export abstract class baseResouceService<T extends baseResouceModel>{
+export abstract class BaseResouceService<T extends baseResouceModel>{
     protected http: HttpClient;
   
     constructor(
