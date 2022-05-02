@@ -13,20 +13,19 @@ export class EntryService extends baseResouceService<Entry>{
   constructor( private categoryService: CategoryService , injetor: Injector)
    { super("api/entryes", injetor, Entry.formJson)}
 
-  override create(entry: Entry): Observable<Entry> {
-    return this.categoryService.getById(entry.categoryId).pipe(
-      mergeMap(category => {
-        entry.categoryName = Object.assign(new Category, category).name;        
-        return super.create(entry);
-      }))
+  override create(entry: Entry): Observable<Entry> {   
+    return this.setCategoryAndSentToServer(entry, super.create.bind(this))
   }
 
   override update(entry: Entry): Observable<Entry> {
+   return this.setCategoryAndSentToServer(entry, super.update.bind(this))
+   
+  } 
+  private setCategoryAndSentToServer(entry: Entry, sendFn: any): Observable<any>{
     return this.categoryService.getById(entry.categoryId).pipe(
       mergeMap(category => {
         entry.categoryName = Object.assign(new Category, category).name;        
-        return super.update(entry);
+        return sendFn(entry);
       }))
-   
-  } 
+  }
 }
