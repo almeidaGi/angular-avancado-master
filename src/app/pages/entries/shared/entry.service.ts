@@ -11,10 +11,9 @@ import { Observable } from 'rxjs';
 export class EntryService extends baseResouceService<Entry>{
 
   constructor( private categoryService: CategoryService , injetor: Injector)
-   { super("api/entryes", injetor)}
+   { super("api/entryes", injetor, Entry.formJson)}
 
   override create(entry: Entry): Observable<Entry> {
-    debugger;
     return this.categoryService.getById(entry.categoryId).pipe(
       mergeMap(category => {
         entry.categoryName = Object.assign(new Category, category).name;        
@@ -29,19 +28,5 @@ export class EntryService extends baseResouceService<Entry>{
         return super.update(entry);
       }))
    
-  }
-
-  override jsonDataToResouces(jsonData: any[]): Entry[] {
-    const entryes: Entry[] = [];
-    jsonData.forEach(element => {
-      const entry = Object.assign(new Entry, element);        
-    //return Entry.formJson(jsonData);       
-      entryes.push(entry);
-    });
-    return entryes;
-  };
-  override jsonDataToResouce(jsonData: any): Entry {
-    return Object.assign(new Entry(), jsonData);    
-   // return Entry.formJson(jsonData);
-  }
+  } 
 }

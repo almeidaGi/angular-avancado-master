@@ -88,7 +88,6 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
     }
   }
   private updateCategory() {
-    debugger;
     const category: Category = Object.assign(new Category(), this.categoryForm.value);
     this.categoryService.update(category).subscribe(
       category => this.actionFormSuccess(category),
@@ -97,7 +96,6 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
   }
   
   public createCategory() {
-    debugger;
     const category: Category = Object.assign(new Category(), this.categoryForm.value);
     this.categoryService.create(category).subscribe(
       category => this.actionFormSuccess(category),
