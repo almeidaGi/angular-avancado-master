@@ -10,7 +10,7 @@
         <h1 class=" h2 border-left pl-2">
             Editando Lançamento: {{pageTitle}}
         </h1>
-        <span>{{descriptionEntrySmall}}</span>
+        <span></span>
     </div>
     <div class="col-md-2 btnBack">
         <a  routerLink="/entries"class="btn btn-info text-white  float-sm-left">
@@ -23,7 +23,7 @@
         </a>
     </div>
 </div>
-<form [formGroup]="entryForm" (submit)="submitForm()">
+<form [formGroup]="resourceForm" (submit)="submitForm()">
     <div class="card">
         <div class="card-header">
             Informações sobre o lançamento:
@@ -139,9 +139,9 @@
                 </ul>
             </div>
 
-            <button [disabled]="submittingForm || entryForm.invalid" type="submit" class="btn btn-primary text-right btn-lg  mt-3">
+            <button [disabled]="submittingForm || resourceForm.invalid" type="submit" class="btn btn-primary text-right btn-lg  mt-3">
                 Salvar
             </button>
         </div>   
     </form>
-    <pre>{{entryForm.value | json}}</pre>
+    <pre>{{resourceForm.value | json}}</pre>

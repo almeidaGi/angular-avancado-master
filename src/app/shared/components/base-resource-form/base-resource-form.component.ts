@@ -1,4 +1,4 @@
-import {  OnInit, AfterContentChecked, Injector } from '@angular/core';
+import {  OnInit, AfterContentChecked, Injector, Directive } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
@@ -6,7 +6,7 @@ import { switchMap } from 'rxjs';
 import { baseResouceModel } from '../../models/base-resource.model';
 import { BaseResouceService } from '../../services/base-resource.service';
 
-
+@Directive()
 export abstract class BaseResourceFormComponent<T extends baseResouceModel> implements OnInit, AfterContentChecked {
 
   currentAction!: string;
@@ -17,14 +17,16 @@ export abstract class BaseResourceFormComponent<T extends baseResouceModel> impl
   submittingForm = false;
   protected route!: ActivatedRoute;
   protected router!: Router;  
-  protected formBuilder!: FormBuilder;
+  protected formBuilder!: FormBuilder; 
+
 
   constructor(
     protected injector: Injector,
-    public resource: T,
-    private toastr: ToastrService,
+    public resource: T, 
     protected resourceService: BaseResouceService<T>,
-    protected jsonDataToResourceFn: (jsonData: any) => T
+    protected jsonDataToResourceFn: (jsonData: any) => T,
+    protected toastr: ToastrService,
+   
   ) {
       this.route = this.injector.get(ActivatedRoute);
       this.router = this.injector.get(Router);
@@ -33,7 +35,7 @@ export abstract class BaseResourceFormComponent<T extends baseResouceModel> impl
 
   ngOnInit(): void {
     this.setCurrentAction();
-    // this.buildResourceForm();
+    this.buildResourceForm();
     this.loadResource();
   }
   ngAfterContentChecked(): void {
@@ -70,7 +72,7 @@ export abstract class BaseResourceFormComponent<T extends baseResouceModel> impl
     }
   }
   protected setPageTitle() {
-    if (this.currentAction == 'new') {
+    if (this.currentAction === 'new') {
       this.pageTitle = this.creationPageTitle();
     } else {
     //   const nameCategory = this.category.name || "";
@@ -81,6 +83,7 @@ export abstract class BaseResourceFormComponent<T extends baseResouceModel> impl
   }
   protected creationPageTitle(): string{
     return "Novo";
+    debugger;
   } 
  protected editionPageTitle(): string{
     return "Edição";
@@ -103,7 +106,8 @@ export abstract class BaseResourceFormComponent<T extends baseResouceModel> impl
   }
   protected actionFormSuccess(resource: T) {
       this.toastr.success("Solicitação atualizada com sucesso!");
-      const baseComponentPath: string = this.route.snapshot.parent?.url[0].path as string;
+      const baseComponentPath = this.route.snapshot.parent?.url[0].path as string;
+      console.log(baseComponentPath);
     // if (category.id != this.category.id) {
     //   this.toastr.success("Categoria criada com sucesso");
     //   this.router.navigateByUrl("categories", { skipLocationChange: true }).then(
@@ -127,4 +131,5 @@ export abstract class BaseResourceFormComponent<T extends baseResouceModel> impl
       this.serverErrorMessages = ["Falha na comunicação com o servidor, por favor, tente mais."]
     }
   }
+  protected abstract buildResourceForm(): void;
 }
