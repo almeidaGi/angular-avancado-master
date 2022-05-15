@@ -7,7 +7,7 @@ export class Entry extends BaseResouceModel {
         override id = 0,
         public name?: string,
         public description?: string,
-        public type?: boolean,
+        public type?: boolean | string,
         public amount?: string,
         public date?: string,
         public paid?: boolean,

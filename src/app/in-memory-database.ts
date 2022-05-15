@@ -26,7 +26,7 @@ export class InMemoryDatabase implements InMemoryDbService {
                     paid: true,
                     date: "10/02/2020",
                     amount: "100,00",
-                    type: false,
+                    type: false ,
                     description: "Camisa feminina branca",
                 } as Entry,
 

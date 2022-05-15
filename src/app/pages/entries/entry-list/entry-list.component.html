@@ -39,8 +39,8 @@
                                   
                 <td class="text-righ">
                    <strong  
-                   [class.text-success]="entry.type === true" 
-                    [class.text-danger]="entry.type === false" >
+                   [class.text-success]="entry.type === true || entry.type === 'true'" 
+                    [class.text-danger]="entry.type === false || entry.type === 'false'" >
                        {{entry.amount}}
                      </strong>
                      <br>
