@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BreadCrumbComponent } from './components/bread-crumb/bread-crumb.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -9,10 +10,12 @@ import { BreadCrumbComponent } from './components/bread-crumb/bread-crumb.compon
     BreadCrumbComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports: [
-    BreadCrumbComponent
+    BreadCrumbComponent,
+    RouterModule
   ]
 })
 export class SharedModule { }

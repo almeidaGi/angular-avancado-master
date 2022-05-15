@@ -26,7 +26,7 @@ export class CategoryFormComponent extends BaseResourceFormComponent<Category>{
       description: [null],
     })
   }
-
+ 
   get name(): any { return this.resourceForm.get('name'); }
   get description(): any { return this.resourceForm.get('description'); }
  

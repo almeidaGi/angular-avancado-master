@@ -9,6 +9,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { IMaskModule } from 'angular-imask';
 import {CalendarModule} from 'primeng/calendar';
 import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -21,6 +23,8 @@ import { TranslateModule } from '@ngx-translate/core';
     EntriesRoutingModule,
     ReactiveFormsModule,  
     IMaskModule,
+    RouterModule,
+    SharedModule,
     CalendarModule,
     TranslateModule,  
     ToastrModule.forRoot(), 
