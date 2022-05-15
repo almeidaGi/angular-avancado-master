@@ -3,11 +3,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 import { switchMap } from 'rxjs';
-import { baseResouceModel } from '../../models/base-resource.model';
+import { BaseResouceModel } from '../../models/base-resource.model';
 import { BaseResouceService } from '../../services/base-resource.service';
 
 @Directive()
-export abstract class BaseResourceFormComponent<T extends baseResouceModel> implements OnInit, AfterContentChecked {
+export abstract class BaseResourceFormComponent<T extends BaseResouceModel> implements OnInit, AfterContentChecked {
 
   currentAction!: string;
   resourceForm!: FormGroup;
@@ -90,18 +90,18 @@ export abstract class BaseResourceFormComponent<T extends baseResouceModel> impl
   }
   protected updateResource() {
     const resource: T = this.jsonDataToResourceFn(this.resourceForm.value)
-    this.resourceService.update(resource).subscribe(
-        resource => this.actionFormSuccess(resource),
-      error => this.actionsForError(error)
-    )
+    this.resourceService.update(resource).subscribe({
+      next: (resource) => this.actionFormSuccess(resource),
+      error: (error) => this.actionsForError(error)
+    })
   }
   
   protected createResource() {
     const resource: T = this.jsonDataToResourceFn(this.resourceForm.value)
-    this.resourceService.create(resource).subscribe(
-      resource => this.actionFormSuccess(resource),
-      error => this.actionsForError(error)
-    )
+    this.resourceService.create(resource).subscribe({
+      next: (resource) => this.actionFormSuccess(resource),
+      error: (error) => this.actionsForError(error)
+    })
 
   }
   protected actionFormSuccess(resource: T) {

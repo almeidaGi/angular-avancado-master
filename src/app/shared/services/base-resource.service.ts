@@ -1,9 +1,9 @@
-import { baseResouceModel } from "../models/base-resource.model";
+import { BaseResouceModel } from "../models/base-resource.model";
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injector } from "@angular/core";
 
-export abstract class BaseResouceService<T extends baseResouceModel>{
+export abstract class BaseResouceService<T extends BaseResouceModel>{
     protected http: HttpClient;
   
     constructor(

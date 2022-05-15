@@ -13,18 +13,18 @@ export class CategoryListComponent implements OnInit {
   constructor(private categoryService: CategoryService) { }
   
   ngOnInit(): void {
-    this.categoryService.getAll().subscribe(
-      categories => this.categories = categories,
-      error => alert('Erro ao carregar a lista.')
-    )
+    this.categoryService.getAll().subscribe({
+     next:(categories) => this.categories = categories,
+     error:(error) => alert('Erro ao carregar a lista.')
+    })
   }
   deleteCategory(category: any) {
     const confirmDelet = confirm('Deseja realmente deletar a categoria?');
     if (confirmDelet) {
-      this.categoryService.delete(category.id).subscribe(
-        () => this.categories = this.categories.filter(element => element != category),
-        () => alert('Erro na tentivava de exclusão')
-      )
+      this.categoryService.delete(category.id).subscribe({
+        next: () => this.categories = this.categories.filter(element => element != category),
+        error: () => alert('Erro na tentivava de exclusão')
+      })
     }
   }
 

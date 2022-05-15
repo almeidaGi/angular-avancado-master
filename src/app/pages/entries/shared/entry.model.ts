@@ -1,7 +1,7 @@
 import { Category } from "../../categories/shared/category.model";
-import {baseResouceModel} from "../../../shared/models/base-resource.model";
+import {BaseResouceModel} from "../../../shared/models/base-resource.model";
 
-export class Entry extends baseResouceModel {
+export class Entry extends BaseResouceModel {
 
     constructor(
         override id = 0,
