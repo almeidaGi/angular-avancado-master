@@ -1,5 +1,5 @@
 import {  OnInit, AfterContentChecked, Injector, Directive } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 import { switchMap } from 'rxjs';
@@ -83,7 +83,6 @@ export abstract class BaseResourceFormComponent<T extends BaseResouceModel> impl
   }
   protected creationPageTitle(): string{
     return "Novo";
-    debugger;
   } 
  protected editionPageTitle(): string{
     return "Edição";

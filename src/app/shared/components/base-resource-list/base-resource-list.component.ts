@@ -1,11 +1,11 @@
-import {  OnInit } from '@angular/core';
+import {  Directive, OnInit } from '@angular/core';
 import { BaseResouceModel } from '../../models/base-resource.model';
 import { BaseResouceService } from '../../services/base-resource.service';
-
+@Directive()
 export abstract class BaseResourceListComponent<T extends BaseResouceModel> implements OnInit {
   resources:T [] = [];
 
-  constructor(private resouceService: BaseResouceService<T>) { }
+  constructor(protected resouceService: BaseResouceService<T>) { }
 
   ngOnInit(): void {
     this.resouceService.getAll().subscribe({
