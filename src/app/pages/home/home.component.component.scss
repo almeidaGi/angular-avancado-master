@@ -1,0 +1,16 @@
+
+img {   
+    margin-top: -2%;
+    margin-left: 10%;
+    width: 78%;
+    background-image: url('body.jpg');
+    background-repeat: no-repeat;    
+    filter: drop-shadow(8px 8px 10px gray);
+  }
+  
+ img .layout {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .5);
+
+    filter: blur(20px);
+
+}

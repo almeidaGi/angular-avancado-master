@@ -5,7 +5,7 @@ import { Injector } from "@angular/core";
 
 export abstract class BaseResouceService<T extends BaseResouceModel>{
     protected http: HttpClient;
-  
+    
     constructor(
       protected apiPath: string,
       protected injector: Injector,      
