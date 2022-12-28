@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { ReportRoutingModule } from './report-routing.module';
 import { ReportComponent } from './report.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -10,6 +11,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
   ],
   imports: [
     SharedModule,
+    CommonModule,
     ReportRoutingModule
   ]
 })

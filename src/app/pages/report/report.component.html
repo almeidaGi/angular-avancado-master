@@ -1,1 +1,73 @@
-<p>report works!</p>
+<app-bread-crumb [items]="[{text:'Relatórios', link:'/reports'} ]"></app-bread-crumb>
+<app-page-header [page-title]="pageTitle">
+</app-page-header>
+
+<div class="card">
+    <div class="card-header">
+        Selecione mês e ano para gerar os relatórios
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="form-group col-md-7">
+                <label for="mes">Mês</label>
+                <select name="mes" id="mes" class="form-control">
+                    <option *ngFor="let m of meses" [value]="m.value">{{m.description}}</option>
+                </select>
+            </div>
+            <div class="form-group col-md-5">
+                <label for="Ano">Ano</label>
+                <select name="ano" id="ano" class="form-control">
+                    <option *ngFor="let y of yearList" [value]="y.value">{{y.description}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row card-body">
+        <div class="col-md text-end "> 
+            <button type="button" (click)="generateReports()" class="btn btn-primary">Gerar Relatórios</button>
+        </div>
+    </div>
+
+    
+
+</div>
+
+<div class="card-body row mt-5 mb-5 ">
+    <div class="col-sm-4">
+    <div class="card    text-center text-white bg-danger">
+        <div class="card-header">
+            TOTAL DE DESPESAS
+        </div>
+        <div class="card-body">
+            <h3 class="card-title">500</h3>
+        </div>
+    </div>
+</div>
+<div class="col-sm-4">
+    <div class="card  text-center text-white bg-success">
+        <div class="card-header">
+            TOTAL DE RECEITAS
+        </div>
+        <div class="card-body">
+            <h3 class="card-title">1000</h3>
+        </div>
+    </div>
+</div>
+<div class="col-sm-4">
+    <div class=" card text-center text-white bg-info">
+        <div class="card-header">
+            TOTAL SALDO
+        </div>
+        <div class="card-body">
+            <h3 class="card-title">1000</h3>
+        </div>
+    </div>
+</div> 
+</div>
+<hr>
+
+<div class="row mt-5 mb-4">
+    <div class="col-md-6">GRAFICO DE RECEITAS</div>
+    <div class="col-md-6">GRAFICO DE DESPESAS   </div>
+</div>
