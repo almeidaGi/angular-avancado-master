@@ -39,10 +39,10 @@
                             Lançamento
                         </label>
                         <input type="text" class="form-control" id="name" formControlName="name">
-                        <div class="text-danger " required *ngIf="name.invalid && name.touched">
-                            <div *ngIf="name.errors?.['required']">Campo obrigatório.</div>
-                            <div *ngIf="name.errors?.['minlength']">Campo deve ter no minímo 2 caracteres.</div>
-                        </div>
+                        <div required *ngIf="name.invalid && name.touched">
+                            
+                    <app-form-field-error [form-control]="name"></app-form-field-error>
+                         </div>
                     </div>
                     <!--valor-->
                     <div class="form-group col-md-3">
@@ -56,9 +56,8 @@
                             <input [imask]="imaskConfig" type="text" class="form-control text-end" id="amount" formControlName="amount">
                         </div>
                         <div class="text-danger " required *ngIf="amount.invalid && amount.touched">
-                            <div *ngIf="amount.errors?.['required']">Campo obrigatório.</div>
-                            <div *ngIf="amount.errors?.['minlength']">Campo deve ter no minímo 2 caracteres.</div>
-                        </div>
+                            <app-form-field-error [form-control]="amount"></app-form-field-error>
+                             </div>
                     </div>
                      <!--data-->
                     <div class="form-group col-md-2">
@@ -76,7 +75,8 @@
                         </p-calendar>
                         
                         <div class="text-danger " required *ngIf="date.invalid && date.touched">
-                            <div *ngIf="date.errors?.['required']">Campo obrigatório.</div>
+                                         
+                           <app-form-field-error [form-control]="date"></app-form-field-error>
                         </div>
                     </div>
                     <!--pago-->

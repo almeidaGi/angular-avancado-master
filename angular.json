@@ -118,5 +118,8 @@
       }
     }
   },
-  "defaultProject": "projetcLoja"
+  "defaultProject": "projetcLoja",
+  "cli": {
+    "analytics": false
+  }
 }
