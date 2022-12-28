@@ -12,6 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { TranslateModule } from '@ngx-translate/core';
 import { HomeModule } from './pages/home/home.module';
+import { NavbarComponent } from './Core/components/navbar/navbar.component';
+import { CoreModule } from './Core/core.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { HomeModule } from './pages/home/home.module';
     ToastrModule.forRoot({ positionClass: 'inline' }),
     ToastrModule.forRoot(), 
     TranslateModule.forRoot(),   
+    CoreModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDatabase)
   ],
   providers: [],
